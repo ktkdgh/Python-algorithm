@@ -14,7 +14,7 @@ roads.sort(key=lambda x:x[1])
 answer = 0
 heap = []
 for i in roads:
-    if not heap:
+    if not heap: 
         heapq.heappush(heap, i)
     else:
         while heap[0][0] < i[1] - d:

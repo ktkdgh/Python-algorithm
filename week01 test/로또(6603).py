@@ -1,3 +1,4 @@
+# 실패
 import sys
 k, s = [], []
 def dfs(cnt, n, k, s):
@@ -15,6 +16,7 @@ while True:
         break  
     k.append(num.pop(0))
     s.append(num)
+print(k, s)
 
 for i in range(len(k)):
     lotto = []

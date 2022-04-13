@@ -1,3 +1,4 @@
+# 성공
 import sys
 x, y = map(int, sys.stdin.readline().split())
 month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]

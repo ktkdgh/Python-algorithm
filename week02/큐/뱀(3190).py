@@ -1,68 +1,69 @@
-from collections import deque
 import sys
+from collections import deque
+
+def change(D, C):
+    # 상(0) 우(1) 하(2) 좌(3)
+    # 동쪽 회전: 상(0) -> 우(1) -> 하(2) -> 좌(3) -> 상(0) : +1 방향
+    # 왼쪽 회전: 상(0) -> 좌(3) -> 하(2) -> 우(1) -> 상(0) : -1 방향
+    if C == "L":
+        D = (D - 1) % 4
+    else:
+        D = (D + 1) % 4
+    return D
+
+# bfs 탐색
+def bfs():
+    dy = [0, 1, 0, -1]
+    dx = [-1, 0, 1, 0]
+    x = 0
+    y = 0
+    queue = deque([[x, y]])
+    time = 1 # 시간
+    vector = 1 # 방향을 잡기 위해
+    graph[x][y] = 2 # 현재 위치 탐색
+    while queue:
+        x += dx[vector]
+        y += dy[vector]
+
+        # 범위 내에 있고 몸에 부딪히지 않은 경우
+        if 0 <= x < n and 0 <= y < n and graph[x][y] != 2:
+            # 이동한 칸에 사과가 없으면 현재 위치의 꼬리를 제거한다.
+            if not graph[x][y] == 1:
+                a, b = queue.popleft()
+                graph[a][b] = 0
+
+            # 앞으로 이동
+            graph[x][y] = 2
+
+            # 다음 탐색할 좌표를 큐에 추가한다.
+            queue.append([x, y])
+
+            # 현재 시간이 지난 후 방향 전환을 해야하는지 확인
+            if time in vt.keys():
+                # 방향 전환 함수를 통해 방향 전환
+                vector = change(vector, vt[time])
+
+            # 카운트
+            time += 1
+
+        # 범위를 벗어나거나 몸에 부딪힌 경우
+        else:
+            return time
 
 n = int(sys.stdin.readline())
-matrix = [[0] * n for _ in range(n)] # 맵크기
+k = int(sys.stdin.readline())
+graph = [[0] * n for _ in range(n)] # 2차원 그래프로 표현
 
-# 사과 위치 저장
-for _ in range(int(sys.stdin.readline())):
-    x, y = map(int, sys.stdin.readline().split())
-    matrix[x-1][y-1] = 1
+# 사과의 개수만큼 반복하여 사과의 위치를 찾는다.
+for _ in range(k):
+    x, c = map(int, sys.stdin.readline().split())
+    graph[x - 1][c - 1] = 1 # 사과 저장
 
-# 방향 변경 저장
-change = {}
-for _ in range(int(sys.stdin.readline())):
-    x, c = sys.stdin.readline().split()
-    change[int(x)] = c
+# 딕셔너리형으로 뱀의 방향 변환 정보를 받는다.
+l = int(sys.stdin.readline())
+vt = {}
+for _ in range(l):
+    x, c = map(str, sys.stdin.readline().split())
+    vt[int(x)] = c
 
-# 뱀 시작 위치
-snake = deque([[0, 0]])
-
-# 상 좌 하 우
-dx = [-1, 0, 1, 0]
-dy = [0, 1, 0, -1]
-
-# 초기값
-d = 1
-time = 0
-nx = ny = 0
-
-# 맵 범위 체크 함수
-def boundary_check(x, y):
-    return True if 0 <= x and x < n and 0 <= y and y < n else False
-
-# 방향 전환 함수
-def change_direction(direction):
-    global d
-    if direction == "D":
-        d = (d+1) % 4
-    else:
-        d = (d-1) % 4
-    return d
-
-while True:
-    time += 1
-    nx += dx[d]
-    ny += dy[d]
-
-    # 방향 전환
-    if time in change.keys():
-        d = change_direction(change[time])
-    
-    if boundary_check(nx, ny):
-        # 몸에 부딪히는 경우
-        if [nx, ny] in snake:
-            break
-
-        # 다음 위치에 사과가 있는 경우 
-        if matrix[nx][ny] == 1:
-            matrix[nx][ny] == 0
-            snake.append([nx, ny])
-
-        elif matrix[nx][ny] == 0:
-            snake.append([nx, ny])
-            x, y = snake.popleft()
-    else:
-        break
-
-print(time)
+print(bfs())

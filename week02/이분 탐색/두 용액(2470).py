@@ -1,31 +1,3 @@
-# 두 포인터 풀이방식
-# import sys
-
-# n = int(sys.stdin.readline())
-# x = list(map(int, sys.stdin.readline().split()))
-# x.sort()
-
-# start = 0
-# end = len(x) -1
-# answer = x[start] + x[end]
-# pl = pr = 0
-# while start <= end:
-#     temp = x[start] + x[end]
-
-#     if abs(temp) == abs(answer):
-#         answer = temp        
-#         pl = start
-#         pr = end
-#         if answer == 0:
-#             break
-#     if abs(temp) < 0:
-#         start += 1
-#     else:
-#         end -= 1
-        
-# print(x[pl], x[pr])
-
-# 이분 탐색
 import sys
 
 n = int(sys.stdin.readline())

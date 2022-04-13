@@ -18,5 +18,3 @@ for i in x:
         print("YES")
     else:
         print("NO")
-        
-
