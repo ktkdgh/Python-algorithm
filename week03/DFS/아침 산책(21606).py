@@ -11,20 +11,20 @@ for _ in range(n-1):
     u, v = map(int, sys.stdin.readline().split())
     graph[u].append(v)
     graph[v].append(u)
-    if a[u] == 1 and a[v] == 1:
+    if a[u] and a[v]:
         tmp += 2
 
 def dfs(start, cnt):
     visited[start] = 1
     for i in graph[start]:
-        if a[i] == 1:
+        if a[i]:
             cnt += 1
-        elif a[i] == 0 and visited[i] == 0:
+        elif not a[i] and not visited[i]:
             cnt = dfs(i, cnt)
     return cnt
 
 for i in range(1, n+1):
-    if a[i] == 0 and visited[i] == 0:
+    if not a[i] and not visited[i]:
         x = dfs(i, 0)
         tmp += x * (x-1)
 print(tmp)
