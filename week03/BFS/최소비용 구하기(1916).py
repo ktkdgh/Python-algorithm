@@ -2,13 +2,15 @@ import heapq
 import sys
 INF = int(1e9)
 
-n, m, k, x = map(int, sys.stdin.readline().split())
+n = int(sys.stdin.readline())
+m = int(sys.stdin.readline())
 graph = [[] for _ in range(n+1)]
 distance = [INF] * (n+1)
 
 for _ in range(m):
-    a, b = map(int, sys.stdin.readline().split())
-    graph[a].append((b, 1))
+    a, b, c = map(int, sys.stdin.readline().split())
+    graph[a].append((b, c))
+start, end = map(int, sys.stdin.readline().split())
 
 def dijkstra(start):
     q = []
@@ -23,14 +25,6 @@ def dijkstra(start):
             if cost < distance[i[0]]:
                 distance[i[0]] = cost
                 heapq.heappush(q, (cost, i[0]))
-dijkstra(x)
-answer = []
-for i in range(1, len(distance)):
-    if distance[i] == k:
-        answer.append(i)
+dijkstra(start)
 
-if not len(answer):
-    print(-1)
-else:
-    for i in answer:
-        print(i)
+print(distance[end])
