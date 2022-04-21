@@ -14,7 +14,6 @@ for i in range(row):
 def bfs():
     while queue:
         x, y = queue.popleft()
-
         for i in range(4):
             nx, ny = x + dx[i], y + dy[i]
             if 0 <= nx < row and 0 <= ny < col:
