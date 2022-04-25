@@ -16,8 +16,7 @@ for i in range(len(str_b)):
 
 max_length = 0
 
-for i in dp:
-    max_length = max(max_length, max(i))
-    print(i)
+for i in range(len(dp)):
+    max_length = max(max_length, max(dp[i]))
+    print(dp[i])
 
-print(max_length)

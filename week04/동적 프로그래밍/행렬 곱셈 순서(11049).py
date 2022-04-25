@@ -1,11 +1,14 @@
 import sys
 
 n = int(sys.stdin.readline())
+s = [list(map(int, sys.stdin.readline().split())) for _ in range(n)]
 
-hang = []
-for _ in range(n):
-    r, c = map(int, sys.stdin.readline().split())
-    hang.append((r, c))
+dp = [[0] * n for _ in range(n)]
 
-dp = [[0 for _ in range(n+1)] for _ in range(n+1)]
-
+for i in range(1, n):
+    for j in range(n - i):
+        x = j + i
+        dp[j][x] = 2 ** 32
+        for k in range(j, x):
+            dp[j][x] = min(dp[j][x], dp[j][k] + dp[k + 1][x] + s[j][0] * s[k][1] * s[x][1])
+print(dp[0][n - 1])
