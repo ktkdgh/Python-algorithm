@@ -14,5 +14,4 @@ for _ in range(int(sys.stdin.readline())):
             value += max - dream[i]
     answer.append(value)
 
-for i in answer:
-    print(i)
+print(*answer, sep='\n')

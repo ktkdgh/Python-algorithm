@@ -22,6 +22,6 @@ while idx != 0:
         answer.append(stone[idx][0])
         max_h -= stone[idx][2]
     idx -= 1
-    
+
 print(len(answer))
 print(*answer[::-1], sep='\n') 
