@@ -1,4 +1,4 @@
-import collections
+# 실패
 from typing import Optional
 root = [1,2,3,4,5]
 
@@ -9,17 +9,19 @@ class TreeNode:
         self.left = left
         self.right = right
 class Solution:
+    longest = 0
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
-        if root is None:
-            return 0
-        
-        queue = collections.deque(root)
-
-        def dfs(start):
-            curr = queue.popleft()
+        def dfs(node):
+            if not node:
+                return -1
             
+            left = dfs(node.left)
+            right = dfs(node.right)
 
+            self.longest = max(self.longest, left + right + 2)
+            return max(left, right) + 1
         
-            
+        dfs(root)
+        return self.longest
 
 print(Solution.diameterOfBinaryTree(0, root))
