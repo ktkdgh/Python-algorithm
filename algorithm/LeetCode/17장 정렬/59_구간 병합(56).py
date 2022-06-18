@@ -1,3 +1,4 @@
+# 정답
 intervals = [[1,3],[2,6],[8,10],[15,18]]
 class Solution:
     def merge(self, intervals: list[list[int]]) -> list[list[int]]:
