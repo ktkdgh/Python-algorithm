@@ -1,7 +1,7 @@
 # https://www.acmicpc.net/problem/9935
 
 # 정답
-import sys
+import sys 
 
 string = sys.stdin.readline().strip()
 bomb = sys.stdin.readline().strip()

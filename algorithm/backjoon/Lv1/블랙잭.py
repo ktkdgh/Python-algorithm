@@ -1,7 +1,7 @@
 # https://www.acmicpc.net/problem/2798
 
 # 정답
-import itertools, sys
+import itertools, sys 
 
 n, m = map(int, sys.stdin.readline().split())
 card = list(map(int, sys.stdin.readline().split()))

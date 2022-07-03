@@ -1,7 +1,7 @@
 # https://www.acmicpc.net/problem/1406
 
 # 정답
-import sys
+import sys 
 
 string = list(sys.stdin.readline().strip())
 n = int(sys.stdin.readline())
