@@ -1,6 +1,6 @@
 # https://www.acmicpc.net/problem/2231
 
-# 틀림
+# 틀림 
 import sys
 
 n = int(sys.stdin.readline())
